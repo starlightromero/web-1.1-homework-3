@@ -1,26 +1,95 @@
 {% extends 'base.html' %}
+{% block head %}
+
+<script src="/static/results.js" charset="utf-8" defer></script>
+
+{% endblock %}
+
 {% block content %}
 
-<section>
-    {#
-        TODO: Replace the hard-coded city and date below with data from the 
-        server 
-    #}
-    <h1>Weather in San Francisco</h1>
-    <p>on Saturday, August 29, 2020</p>
-    
-    {#
-        TODO: Add the temperature, description, humidity, wind speed, sunrise,
-        & sunset below. Replace 'F' with the appropriate units.
-    #}
+<div class="tab">
+  <button class="tablinks" id="currentTab">Current</button>
+  <button class="tablinks" id="minuteTab">Minute Forecast</button>
+  <button class="tablinks" id="hourlyTab">Hourly Forecast</button>
+  <button class="tablinks" id="dailyTab">Daily Forecast</button>
+</div>
+
+<section id="Current" class="result tabcontent">
+  <h2>Current Weather for {{ zip }}</h2>
+
+  <div class="info">
+    <p>{{ date }}</p>
+
+    <img src="http://openweathermap.org/img/wn/{{ icon }}@4x.png" />
+
     <ul>
-        <li>Temperature: ° F</li>
-        <li>Description: </li>
-        <li>Humidity: %</li>
-        <li>Wind speed:  miles/hour</li>
-        <li>Sunrise: </li>
-        <li>Sunset: </li>
+      <li>Temperature: {{ temp }}° {{ units_letter }}</li>
+      <li>Description: {{ description }}</li>
+      <li>Humidity: {{ humidity }}%</li>
+      <li>Wind speed: {{ wind_speed }} miles/hour</li>
+      <li>Sunrise: {{ sunrise }}</li>
+      <li>Sunset: {{ sunset }}</li>
     </ul>
-    
+  </div>
 </section>
+
+<section id="Minute" class="result tabcontent">
+  <h2>1 Hour Forecast for {{ zip }}</h2>
+
+  {% for minute in minutes %}
+  <hr>
+  <div class="info">
+    <p>{{ minute_list[minutes.index(minute)] }}</p>
+
+    <ul>
+      <li>Precipitation: {{ minute['precipitation'] }} mm</li>
+    </ul>
+  </div>
+  {% endfor %}
+
+  </div>
+</section>
+
+<section id="Hourly" class="result tabcontent">
+  <h2>48 Hour Forecast for {{ zip }}</h2>
+
+  {% for hour in hours %}
+  <hr>
+  <div class="info">
+    <p>{{ hour_list[hours.index(hour)] }}</p>
+    <img src="http://openweathermap.org/img/wn/{{ hour['weather'][0]['icon'] }}@4x.png" />
+
+    <ul>
+      <li>Temperature: {{ hour['temp'] }}° {{ units_letter }}</li>
+      <li>Feels like: {{ hour['feels_like'] }}° {{ units_letter }}</li>
+      <li>Description: {{ hour['weather'][0]['description'] }}</li>
+      <li>Humidity: {{ hour['humidity'] }}%</li>
+      <li>Wind speed: {{ hour['wind_speed'] }} miles/hour</li>
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
+<section id="Daily" class="result tabcontent">
+  <h2>7 Day Forecast for {{ zip }}</h2>
+
+  {% for day in days %}
+  <hr>
+  <div class="info">
+    <p>{{ day_list[days.index(day)] }}</p>
+    <img src="http://openweathermap.org/img/wn/{{ day['weather'][0]['icon'] }}@4x.png" />
+
+    <ul>
+      <li>High: {{ day['temp']['max'] }}° {{ units_letter }}</li>
+      <li>Low: {{ day['temp']['night'] }}° {{ units_letter }}</li>
+      <li>Description: {{ day['weather'][0]['description'] }}</li>
+      <li>Humidity: {{ day['humidity'] }}%</li>
+      <li>Wind speed: {{ day['wind_speed'] }} miles/hour</li>
+      <li>Sunrise: {{ day['sunrise'] }}</li>
+      <li>Sunset: {{ day['sunset'] }}</li>
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+
 {% endblock %}

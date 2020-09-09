@@ -1,28 +1,157 @@
 body {
-    background-color: #e6faff;
-    display: flex;
-    justify-content: center;
-    font-family: "Roboto", sans-serif;
+  background: url('./assets/background.jpg') top center repeat, #F79061;
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+  margin: 0;
 }
 
 main {
-    width: 800px;
+  margin: auto;
+  width: 800px;
 }
 
 main > section {
-    background-color: #fff;
-    border: 1px solid #007a99;
-    box-shadow: 5px 5px 5px #999;
-    padding: 20px;
-    margin-top: 20px;
-    width: 100%;
+  background-color: rgba(112, 24, 24, 0.5);
+  border: 3px solid #000;
+  color: #fff;
+  margin: 20px 0;
+  padding: 2rem 4rem;
 }
 
 fieldset {
-    border: 1px solid #000;
+  border: 1px solid #000;
+}
+
+h1 {
+  text-align: center;
 }
 
 h1 a {
-    color: #000;
-    text-decoration: none;
+  color: #fff;
+  font-size: 3rem;
+  text-decoration: none;
+}
+
+h1 a:hover {
+  color: #FF5100;
+}
+
+h2 {
+  color: #F79061;
+}
+
+input {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: 'Roboto', sans-serif;
+  outline: #F79061;
+}
+
+input[type=text], input[type=date] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid #F79061;
+  color: #F79061;
+  font-size: 1rem;
+}
+
+input[type=radio] {
+  border: 2px solid #F79061;
+  border-radius: 50%;
+  bottom: 0;
+  cursor: pointer;
+  height: 1.2rem;
+  left: 0;
+  margin-right: 0.5rem;
+  position: relative;
+  right: 0;
+  top: 0.4rem;
+  transition: all 0.15s ease-out 0s;
+  width: 1.2rem;
+}
+
+input[type=radio]:hover {
+  background: #F79061;
+}
+
+input[type=radio]:checked {
+  background: #FF5100;
+}
+
+input[type=submit], button {
+  background-color: transparent;
+  border: 3px solid #F79061;
+  color: #F79061;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.2rem;
+}
+
+input[type=submit]:hover, button:hover, .active {
+  background-color: #F79061;
+  border: 3px solid #FF5100;
+  color: #FF5100;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.result p {
+ text-align: left;
+}
+
+.result ul {
+ padding: 0;
+ width: 200px;
+}
+
+.result ul li {
+  line-height: 1.5rem;
+  list-style-type: none;
+  text-align: right;
+}
+
+.tab {
+  background-color: rgba(112, 24, 24, 0.5);
+  border: 3px solid #000;
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: -23px;
+  padding: 0.5rem 0.2rem;
+}
+
+.tabcontent {
+  animation: fadeEffect 1s;
+  border-top: none;
+  display: none;
+}
+
+.info {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info p {
+  width: 230px;
+}
+
+hr {
+  border: 1px solid #FF5100;
+  width: 100%;
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
